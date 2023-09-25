@@ -6,13 +6,13 @@ USE tp_1;
 
 CREATE TABLE Utilisateur (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    nom VARCHAR(255),
     prenom VARCHAR(255),
+    nom VARCHAR(255),
     telephone INT(20),
     genre VARCHAR(10)
 );
 
-INSERT INTO Utilisateur (nom, prenom, telephone, genre)
+INSERT INTO Utilisateur (prenom, nom, telephone, genre)
 VALUES
     ('Tom', 'Cruise', 1231144747, 'male'),
     ('Paul', 'Holland', 1234567891, 'male'),

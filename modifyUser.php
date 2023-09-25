@@ -4,7 +4,6 @@ include './public/header.php';
 
 $utilisateur = new Utilisateur();
 
-// Check if the user ID is provided in the query string
 if (isset($_GET['id'])) {
     $userId = $_GET['id'];
     $user = $utilisateur->getUserById($userId);
@@ -24,7 +23,6 @@ if (isset($_POST['update'])) {
     $telephone = $_POST['telephone'];
     $genre = $_POST['genre'];
 
-    // Call the updateUser method to update the user's information
     $result = $utilisateur->updateUser($userId, $nom, $prenom, $telephone, $genre);
 
     if ($result) {
@@ -77,4 +75,5 @@ if (isset($_POST['update'])) {
 </div>
 </div>
 </body>
+
 </html>
