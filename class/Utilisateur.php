@@ -18,7 +18,18 @@ try {
     echo $e->getMessage();
 }
 
-class Utilisateur
+interface CRUD
+{
+    public function getUsers();
+    public function getUserById($id);
+    public function getUsersByGenre($genre);
+    public function addUser($nom, $prenom, $telephone, $genre);
+    public function updateUser($id, $nom, $prenom, $telephone, $genre);
+    public function deleteUser($id);
+}
+
+
+class Utilisateur implements CRUD
 {
     //Methode getUsers pour recupere tous les utilisateurs
     public function getUsers()
@@ -57,7 +68,8 @@ class Utilisateur
         global $oPDO;
 
         //preparation de la requete
-        $oPDOStmt = $oPDO->prepare('INSERT INTO Utilisateur SET nom=:nom, prenom=:prenom,telephone=:telephone,genre=:genre;');
+        $sql = 'INSERT INTO Utilisateur SET nom=:nom, prenom=:prenom,telephone=:telephone,genre=:genre;';
+        $oPDOStmt = $oPDO->prepare($sql);
         //liaison des parametres
         $oPDOStmt->bindParam(':nom', $nom, PDO::PARAM_STR);
         $oPDOStmt->bindParam(':prenom', $prenom, PDO::PARAM_STR);
@@ -75,12 +87,13 @@ class Utilisateur
 
 
     //Methode pour modifier un utilisateur
-    public function updateUser($id, $data)
+    public function updateUser($id, $nom, $prenom, $telephone, $genre)
     {
         global $oPDO;
 
         //preparation de la requete
-        $oPDOStmt = $oPDO->prepare('UPDATE Utilisateur SET nom=:nom, prenom=:prenom,telephone=:telephone,genre=:genre WHERE id=:id;');
+        $sql = 'UPDATE Utilisateur SET nom=:nom, prenom=:prenom,telephone=:telephone,genre=:genre WHERE id=:id;';
+        $oPDOStmt = $oPDO->prepare($sql);
         //liaison des parametres
         $oPDOStmt->bindParam(':id', $id, PDO::PARAM_INT);
         $oPDOStmt->bindParam(':nom', $nom, PDO::PARAM_STR);
@@ -99,7 +112,8 @@ class Utilisateur
         global $oPDO;
 
         //preparation de la requete
-        $oPDOStmt = $oPDO->prepare('DELETE FROM Utilisateur WHERE id=:id;');
+        $sql = 'DELETE FROM Utilisateur WHERE id=:id;';
+        $oPDOStmt = $oPDO->prepare($sql);
         //liaison des parametres
         $oPDOStmt->bindParam(':id', $id, PDO::PARAM_INT);
         //execution de la requete      
