@@ -3,15 +3,15 @@ include './class/Utilisateur.php';
 include './public/header.php';
 
 $utilisateur = new Utilisateur();
+$users = $utilisateur->getUsers();
 
-// Handle filter and show users
 if (isset($_POST['showUsers'])) {
     $selectedGender = $_POST['genderFilter'];
-    //Filter by Gender 
+    // Filter by Gender
     $users = ($selectedGender === 'male' || $selectedGender === 'female') ? $utilisateur->getUsersByGenre($selectedGender) : $utilisateur->getUsers();
 }
 
-//Delete a user
+// Delete a user
 if (isset($_GET['deleteUser'])) {
     $id = $_GET['id'];
     $utilisateur->deleteUser($id);
@@ -69,7 +69,7 @@ if (isset($_GET['deleteUser'])) {
                         <td><?= $user['genre'] ?></td>
                         <td>
                             <a href="modifyUser.php?id=<?= $user['id'] ?>" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
-                            <a href="deleteUser.php?id=<?= $user['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?')"><i class="bi bi-trash"></i></a>
+                            <a href="deleteUser.php?id=<?= $user['id'] ?>" class="btn btn-danger"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
