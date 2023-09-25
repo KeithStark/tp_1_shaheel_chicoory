@@ -1,0 +1,7 @@
+/*Styling the body*/
+body {
+    margin: 0;
+    background: linear-gradient(to right bottom, rgb(240, 236, 238), rgb(124, 157, 167), rgb(196, 128, 138));
+    min-height: 100vh;
+    font-family: "Roboto", sans-serif;
+}
